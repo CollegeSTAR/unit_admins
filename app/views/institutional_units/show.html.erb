@@ -1,1 +1,25 @@
 <h1><%= @institutional_unit.name %></h1>
+
+<h2>Departments</h2>
+
+<ul>
+  <% @institutional_unit.departments.each do |department| %>
+    <li><%= link_to(
+        department.name,
+        institution_institutional_unit_department_path(
+          institution_slug: @institution.slug,
+          institutional_unit_slug: @institutional_unit.slug,
+          slug: department.slug
+        )
+      )
+    %></li>
+  <% end %>
+  <li><%= link_to(
+      'Add new department', 
+      new_institution_institutional_unit_department_path(
+        institution_slug: @institution.slug,
+        institutional_unit_slug: @institutional_unit.slug
+      )
+    )
+  %></li>
+</ul>

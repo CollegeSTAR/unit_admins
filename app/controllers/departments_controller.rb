@@ -26,6 +26,7 @@ class DepartmentsController < ApplicationController
         )
       )
     else
+      flash[:error] = @department.errors.full_message(:name, "can't be blank")
       render :new
     end
   end
