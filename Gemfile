@@ -46,6 +46,7 @@ group :development, :test do
   gem 'capybara'
   gem 'factory_bot'
   gem 'faker'
+  gem 'pry'
   gem 'rspec-rails'
   gem 'rubocop', '~> 0.55.0', require: false
 end
