@@ -1,0 +1,7 @@
+<h1>Create a new department</h1>
+
+<%= form_for [@institution, @institutional_unit, @department] do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.submit 'Create Department' %>
+<% end %>
