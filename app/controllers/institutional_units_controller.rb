@@ -19,8 +19,9 @@ class InstitutionalUnitsController < ApplicationController
     
     if @institutional_unit.persisted?
       flash[:notice] = "Institutional Unit successfully created."
-      redirect_to institutional_unit_path(slug: @institutional_unit.slug)
+      redirect_to @institutional_unit
     else
+      flash[:error] = @institutional_unit.errors.full_message(:name, "can't be blank")
       render :new
     end
   end

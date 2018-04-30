@@ -18,13 +18,26 @@ RSpec.feature 'Institutional Unit Management' do
   end
 
   describe 'Create a new unit' do
-    scenario 'User fills out new unit form' do
-      visit '/institutional-units/new'
+    
+    context "with correct params" do
+      scenario 'User fills out new unit form' do
+        visit '/institutional-units/new'
 
-      fill_in 'institutional_unit_name', with: unit_attrs[:name]
-      click_button 'Create Unit'
+        fill_in 'institutional_unit_name', with: unit_attrs[:name]
+        click_button 'Create Unit'
 
-      expect(page).to have_content('Institutional Unit successfully created.')
+        expect(page).to have_content('Institutional Unit successfully created.')
+      end
+    end
+    
+    context 'without correct params' do
+      scenario 'User fills out new unit form' do
+        visit '/institutional-units/new'
+
+        click_button 'Create Unit'
+
+        expect(page).to have_content("Name can't be blank")
+      end
     end
   end
 end
