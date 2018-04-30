@@ -5,4 +5,11 @@
   <% @institution.institutional_units.each do |unit| %>
     <li><%= link_to unit.name, institution_institutional_unit_path(institution_slug: @institution.slug, slug: unit.slug) %></li>
   <% end %>
+  <li>
+    <%= link_to(
+      'Add new institutional unit',
+      new_institution_institutional_unit_path( institution_slug: @institution.slug)
+      )
+    %>
+  </li>
 </ul>

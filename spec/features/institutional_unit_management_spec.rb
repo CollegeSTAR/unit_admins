@@ -22,7 +22,8 @@ RSpec.feature 'Institutional Unit Management' do
     
     context "with correct params" do
       scenario 'User fills out new unit form' do
-        visit "/institutions/#{institution.slug}/institutional-units/new"
+        visit "/institutions/#{institution.slug}"
+        click_link 'Add new institutional unit'
 
         fill_in 'institutional_unit_name', with: unit_attrs[:name]
         click_button 'Create Unit'
