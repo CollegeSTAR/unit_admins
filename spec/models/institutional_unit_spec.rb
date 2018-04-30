@@ -11,9 +11,13 @@ RSpec.describe InstitutionalUnit do
     it { should validate_presence_of(:slug) }
     it { should validate_uniqueness_of(:slug) }
   end
+  
+  describe 'associations' do
+    it { should belong_to(:institution) }
+  end
 
   describe 'to_param' do
-    it "returns slug" do
+    it 'returns slug' do
       expect(unit.to_param).to eq(unit.slug)
     end
   end

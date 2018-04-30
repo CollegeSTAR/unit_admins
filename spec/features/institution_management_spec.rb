@@ -4,6 +4,7 @@ RSpec.feature 'Institution management' do
   
   let(:institution_attrs) { attributes_for(:institution) }
   let!(:institution) { create(:institution) }
+  let(:institution_with_units) { create(:institution_with_units) }
 
   describe 'Index' do
     scenario 'User visits Institution index page' do
@@ -25,6 +26,16 @@ RSpec.feature 'Institution management' do
       visit "/institutions/#{institution.slug}"
 
       expect(page).to have_content(institution.name)
+    end
+
+    context 'With child institutional_units' do
+      scenario 'User visits an Institution and see institutional_units' do
+       unit = institution_with_units.institutional_units.first
+       visit "/institutions/#{institution_with_units.slug}"
+       find(:xpath, "//a[@href='/institutions/#{institution_with_units.slug}/institutional-units/#{unit.slug}']").click
+
+       expect(page).to have_content(unit.name)
+      end
     end
   end
 

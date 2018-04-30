@@ -1,1 +1,8 @@
 <h1><%= @institution.name %></h1>
+
+<h2>Institutional Units</h2>
+<ul>
+  <% @institution.institutional_units.each do |unit| %>
+    <li><%= link_to unit.name, institution_institutional_unit_path(institution_slug: @institution.slug, slug: unit.slug) %></li>
+  <% end %>
+</ul>

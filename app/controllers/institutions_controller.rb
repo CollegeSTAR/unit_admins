@@ -5,7 +5,7 @@ class InstitutionsController < ApplicationController
   end
 
   def show
-    @institution = Institution.find_by slug: params[:slug]
+    @institution = Institution.includes(:institutional_units).find_by slug: params[:slug]
   end
 
   def new
