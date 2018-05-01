@@ -1,0 +1,21 @@
+<%= form_for [@institution, @institutional_unit, @administrator] do |f| %>
+  <%= f.label :job_title %>
+  <%= f.select :job_title, [['Dean', 'dean'], ['Associate Dean'], ['Chair', 'chair'], ['Other', '']], include_blank: true %>
+  <%= f.label :title %>
+  <%= f.select :title, ['Dr.', 'Mr.', 'Mrs.', 'Ms.'], include_blank: true %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number %>
+  <%= f.label :mail_stop %>
+  <%= f.text_field :mail_stop %>
+  <%= f.label :sec_loc, 'Secretary Location' %>
+  <%= f.text_field :sec_loc %>
+  <%= f.label :interim %>
+  <%= f.check_box :interim %>
+  <%= f.submit 'Create administrator' %>
+<% end %>

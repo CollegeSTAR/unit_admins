@@ -1,4 +1,16 @@
 <h1><%= @institutional_unit.name %></h1>
+<h2>Administrators</h2>
+
+<ul>
+  <li><%= link_to(
+      'Add an administrator', 
+      new_institution_institutional_unit_administrator_path(
+        institution: @institution.slug,
+        institutional_unit_slug: @institutional_unit.slug
+      )
+    )
+  %></li>
+</ul>
 
 <h2>Departments</h2>
 
