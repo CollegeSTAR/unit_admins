@@ -16,5 +16,12 @@ FactoryBot.define do
       job_title ''
       other_job_title 'Dean of Students'
     end
+
+    factory :administrator_with_institutional_unit do
+    
+      after(:create) do |admin|
+        admin.institutional_units << create(:institutional_unit)
+      end
+    end
   end
 end

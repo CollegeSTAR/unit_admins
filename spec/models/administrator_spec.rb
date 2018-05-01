@@ -9,8 +9,7 @@ RSpec.describe Administrator do
   end
 
   describe 'associations' do
-    it { should have_many(:institutional_unit_administrator_associations).dependent(:destroy) }
-    it { should have_many(:institutional_units).through(:institutional_unit_administrator_associations) }
+    it { should belong_to(:institutional_unit) }
   end
 
   describe 'other_job_title' do
