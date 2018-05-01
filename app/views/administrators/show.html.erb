@@ -1,1 +1,7 @@
-<h1><%= @administrator.job_title %></h1>
+<h1><%= "#{@administrator.job_title.capitalize} #{@administrator.title} #{@administrator.first_name.capitalize} #{@administrator.last_name.capitalize}" %>
+    <%= @administrator.interim?? '(Interim)' : '' %>
+</h1>
+
+<p><strong>Email:</strong> <%= @administrator.email.blank?? 'Not provided' : @administrator.email %></p>
+<p><strong>Phone Number:</strong> <%= @administrator.phone_number.blank?? 'Not Provided' : @administrator.phone_number %></p>
+<p><strong>Mail Stop:</strong> <%= @administrator.mail_stop.blank?? 'Not Provided' : @administrator.mail_stop %></p>
