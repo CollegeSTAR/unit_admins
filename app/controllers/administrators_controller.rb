@@ -12,6 +12,7 @@ class AdministratorsController < ApplicationController
   def create
     @administrator = Administrator.create(administrator_params)
     if @administrator.persisted?
+      @institutional_unit.administrators << @administrator
       flash[:notice] = 'Successfully added administrator.'
       redirect_to institution_institutional_unit_administrator_path(
         institution_slug: @institution.slug,

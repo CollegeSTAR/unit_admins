@@ -8,6 +8,11 @@ RSpec.describe Administrator do
     it { should validate_uniqueness_of(:job_title).scoped_to([:first_name, :last_name]) }
   end
 
+  describe 'associations' do
+    it { should have_many(:institutional_unit_administrator_associations).dependent(:destroy) }
+    it { should have_many(:institutional_units).through(:institutional_unit_administrator_associations) }
+  end
+
   describe 'other_job_title' do
     context 'with no job title value set' do
       it 'should set job_title to other_job_title value' do

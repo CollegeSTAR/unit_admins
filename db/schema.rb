@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_30_203805) do
+ActiveRecord::Schema.define(version: 2018_05_01_193008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2018_04_30_203805) do
     t.index ["slug"], name: "index_departments_on_slug", unique: true
   end
 
+  create_table "institutional_unit_administrator_associations", force: :cascade do |t|
+    t.bigint "institutional_unit_id"
+    t.bigint "administrator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["administrator_id"], name: "index_unit_admin_assoc_admin_id"
+    t.index ["institutional_unit_id"], name: "index_unit_admin_assoc_unit_id"
+  end
+
   create_table "institutional_units", force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -62,5 +71,7 @@ ActiveRecord::Schema.define(version: 2018_04_30_203805) do
 
   add_foreign_key "departments", "institutional_units"
   add_foreign_key "departments", "institutions"
+  add_foreign_key "institutional_unit_administrator_associations", "administrators"
+  add_foreign_key "institutional_unit_administrator_associations", "institutional_units"
   add_foreign_key "institutional_units", "institutions"
 end
