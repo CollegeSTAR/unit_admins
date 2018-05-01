@@ -1,6 +1,7 @@
 class AdministratorsController < ApplicationController
 
   before_action :set_institution_institution_unit
+
   def show
     @administrator = Administrator.find(params[:id])
   end
@@ -10,9 +11,11 @@ class AdministratorsController < ApplicationController
   end
 
   def create
-    @administrator = Administrator.create(administrator_params)
+    @administrator = Administrator.new(administrator_params)
+    @administrator.institutional_unit = @institutional_unit
+    @administrator.save
+
     if @administrator.persisted?
-      @institutional_unit.administrators << @administrator
       flash[:notice] = 'Successfully added administrator.'
       redirect_to institution_institutional_unit_administrator_path(
         institution_slug: @institution.slug,

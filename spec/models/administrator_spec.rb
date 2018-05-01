@@ -9,7 +9,7 @@ RSpec.describe Administrator do
   end
 
   describe 'associations' do
-    it { should belong_to(:institutional_unit) }
+    it { should belong_to(:institutional_unit).optional }
   end
 
   describe 'other_job_title' do
