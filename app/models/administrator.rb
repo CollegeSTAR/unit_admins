@@ -3,6 +3,9 @@ class Administrator < ActiveRecord::Base
   validates_uniqueness_of :job_title, scope: [:first_name, :last_name]
 
   belongs_to :institutional_unit, optional: true
+  has_one :administrative_assistant, dependent: :destroy
+
+  accepts_nested_attributes_for :administrative_assistant, reject_if: :all_blank, allow_destroy: true
 
   def other_job_title=(value)
     if self.job_title == nil || self.job_title == ''

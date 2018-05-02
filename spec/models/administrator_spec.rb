@@ -10,6 +10,11 @@ RSpec.describe Administrator do
 
   describe 'associations' do
     it { should belong_to(:institutional_unit).optional }
+    it { should have_one(:administrative_assistant).dependent(:destroy) }
+  end
+
+  describe "accepts_nested_attributes_for" do
+    it { should accept_nested_attributes_for(:administrative_assistant).allow_destroy(true) }
   end
 
   describe 'other_job_title' do

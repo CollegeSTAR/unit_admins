@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_01_201339) do
+ActiveRecord::Schema.define(version: 2018_05_02_144011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "administrative_assistants", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone_number"
+    t.string "mail_stop"
+    t.string "address"
+    t.bigint "administrator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["administrator_id"], name: "index_administrative_assistants_on_administrator_id"
+  end
 
   create_table "administrators", force: :cascade do |t|
     t.string "job_title"
@@ -62,6 +75,7 @@ ActiveRecord::Schema.define(version: 2018_05_01_201339) do
     t.index ["slug"], name: "index_institutions_on_slug", unique: true
   end
 
+  add_foreign_key "administrative_assistants", "administrators"
   add_foreign_key "administrators", "institutional_units"
   add_foreign_key "departments", "institutional_units"
   add_foreign_key "departments", "institutions"

@@ -8,6 +8,7 @@ class AdministratorsController < ApplicationController
   
   def new
     @administrator = Administrator.new
+    @administrator.administrative_assistant = AdministrativeAssistant.new
   end
 
   def create
@@ -45,7 +46,15 @@ class AdministratorsController < ApplicationController
         :phone_number, 
         :mail_stop,
         :sec_loc,
-        :interim
+        :interim,
+        administrative_assistant_attributes: [
+          :first_name,
+          :last_name,
+          :email,
+          :phone_number,
+          :mail_stop,
+          :address
+        ]
       )
   end
 end

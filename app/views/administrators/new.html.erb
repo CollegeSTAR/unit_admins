@@ -17,5 +17,22 @@
   <%= f.text_field :sec_loc %>
   <%= f.label :interim %>
   <%= f.check_box :interim %>
+  
+  <h2>Administrative Assistant</h2>
+  <%= f.fields_for :administrative_assistant, @administrator.administrative_assistant do |assistant_fields| %>
+    <%= assistant_fields.label :first_name %>
+    <%= assistant_fields.text_field :first_name %>
+    <%= assistant_fields.label :last_name %>
+    <%= assistant_fields.text_field :last_name %>
+    <%= assistant_fields.label :email %>
+    <%= assistant_fields.text_field :email %>
+    <%= assistant_fields.label :phone_number %>
+    <%= assistant_fields.text_field :phone_number %>
+    <%= assistant_fields.label :mail_stop %>
+    <%= assistant_fields.text_field :mail_stop %>
+    <%= assistant_fields.label :address %>
+    <%= assistant_fields.text_field :address %>
+  <% end %>
+
   <%= f.submit 'Create administrator' %>
 <% end %>
