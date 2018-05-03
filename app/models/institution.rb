@@ -5,6 +5,7 @@ class Institution < ActiveRecord::Base
 
   has_many :institutional_units, dependent: :destroy
   has_many :departments, dependent: :destroy
+  has_many :notes, dependent: :destroy
 
   def to_param
     slug

@@ -16,6 +16,7 @@ RSpec.describe InstitutionalUnit do
     it { should belong_to(:institution) }
     it { should have_many(:departments).dependent(:destroy) }
     it { should have_many(:administrators).dependent(:destroy) }
+    it { should have_many(:notes).dependent(:destroy) }
   end
 
   describe 'to_param' do

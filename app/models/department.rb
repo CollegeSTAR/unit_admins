@@ -5,7 +5,8 @@ class Department < ActiveRecord::Base
 
   belongs_to :institution
   belongs_to :institutional_unit
-  has_many :department_administrators
+  has_many :department_administrators, dependent: :destroy
+  has_many :notes, dependent: :destroy
 
   def to_param
     slug

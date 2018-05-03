@@ -14,6 +14,7 @@ RSpec.describe Institution do
   describe 'associations' do
     it { should have_many(:institutional_units).dependent(:destroy) }
     it { should have_many(:departments).dependent(:destroy) }
+    it { should have_many(:notes).dependent(:destroy) }
   end
 
   describe 'to_param' do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_03_195338) do
+ActiveRecord::Schema.define(version: 2018_05_03_201217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,20 @@ ActiveRecord::Schema.define(version: 2018_05_03_195338) do
     t.index ["slug"], name: "index_institutions_on_slug", unique: true
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.text "text"
+    t.bigint "institution_id"
+    t.bigint "institutional_unit_id"
+    t.bigint "department_id"
+    t.bigint "administrator_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["administrator_id"], name: "index_notes_on_administrator_id"
+    t.index ["department_id"], name: "index_notes_on_department_id"
+    t.index ["institution_id"], name: "index_notes_on_institution_id"
+    t.index ["institutional_unit_id"], name: "index_notes_on_institutional_unit_id"
+  end
+
   add_foreign_key "administrative_assistants", "administrators"
   add_foreign_key "administrators", "departments"
   add_foreign_key "administrators", "institutional_units"
@@ -88,4 +102,8 @@ ActiveRecord::Schema.define(version: 2018_05_03_195338) do
   add_foreign_key "departments", "institutional_units"
   add_foreign_key "departments", "institutions"
   add_foreign_key "institutional_units", "institutions"
+  add_foreign_key "notes", "administrators"
+  add_foreign_key "notes", "departments"
+  add_foreign_key "notes", "institutional_units"
+  add_foreign_key "notes", "institutions"
 end
