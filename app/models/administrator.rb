@@ -2,6 +2,7 @@ class Administrator < ActiveRecord::Base
   validates :job_title, :first_name, :last_name, presence: true
   validates_uniqueness_of :job_title, scope: [:first_name, :last_name]
 
+  belongs_to :institution
   has_one :administrative_assistant, dependent: :destroy
 
   accepts_nested_attributes_for :administrative_assistant, reject_if: :all_blank, allow_destroy: true

@@ -1,13 +1,3 @@
-<h1><%= "#{@administrator.job_title.capitalize} #{@administrator.title} #{@administrator.first_name.capitalize} #{@administrator.last_name.capitalize}" %>
-    <%= @administrator.interim?? '(Interim)' : '' %>
-</h1>
-<%= link_to "Colleges & Schools", institution_path(slug: @administrator.institution.slug) %> /
-<%= link_to "#{@administrator.institutional_unit.name}", 
-  institution_institutional_unit_path(
-    institution_slug: @administrator.institutional_unit.institution.slug,
-    slug: @administrator.institutional_unit.slug
-  )%> / <%= @administrator.job_title %>
-
 
 <p><strong>Email:</strong> <%= @administrator.email.blank?? 'Not provided' : @administrator.email %></p>
 <p><strong>Phone Number:</strong> <%= @administrator.phone_number.blank?? 'Not Provided' : @administrator.phone_number %></p>

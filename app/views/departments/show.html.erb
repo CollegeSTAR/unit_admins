@@ -1,7 +1,24 @@
 <h1><%= @department.name %></h1>
-
+<%= link_to "Colleges & Schools", institution_path(slug: @department.institution.slug) %> /
+<%= link_to "#{@department.institutional_unit.name}", 
+  institution_institutional_unit_path(
+    institution_slug: @department.institution.slug,
+    slug: @department.institutional_unit.slug
+  ) 
+%> / <%= @department.name %>
 <h2>Administrators</h2>
 <ul>
+  <% @department.department_administrators.each do |admin| %>
+    <li><%= link_to(
+      "#{admin.first_name} #{admin.last_name}",
+      institution_institutional_unit_department_department_administrator_path(
+        institution_slug: @department.institution.slug,
+        insititutional_unit_slug: @department.institutional_unit.slug,
+        department_slug: @department.slug,
+        id: admin.id
+      )
+    )%></li>
+  <% end %>
   <li><%= link_to(
     'Add an administrator',
     new_institution_institutional_unit_department_department_administrator_path(

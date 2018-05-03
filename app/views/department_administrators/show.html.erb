@@ -2,18 +2,19 @@
     <%= @administrator.interim?? '(Interim)' : '' %>
 </h1>
 
-<p><strong>Email:</strong> <%= @administrator.email.blank?? 'Not provided' : @administrator.email %></p>
-<p><strong>Phone Number:</strong> <%= @administrator.phone_number.blank?? 'Not Provided' : @administrator.phone_number %></p>
-<p><strong>Mail Stop:</strong> <%= @administrator.mail_stop.blank?? 'Not Provided' : @administrator.mail_stop %></p>
+<%= link_to "Colleges & Schools", institution_path(slug: @institution.slug) %> /
+<%= link_to "#{@institutional_unit.name}", 
+  institution_institutional_unit_path(
+    institution_slug: @institution.slug,
+    slug: @institutional_unit.slug
+  )%> / 
+<%= link_to(
+  @department.name,
+  institution_institutional_unit_department_path(
+    institution_slug: @institution.slug,
+    insitutional_unit_slug: @institutional_unit.slug,
+    slug: @department.slug
+  )
+)%> / <%= @administrator.job_title %>
 
-<h2>Administrative Assistant</h2>
-<% if !@administrator.administrative_assistant.blank? %>
-  <% admin_assistant = @administrator.administrative_assistant %>
-  <p><strong><%= admin_assistant.first_name %> <%= admin_assistant.last_name %></strong></p>
-  <p><strong>Email:</strong> <%= admin_assistant.email %></p>
-  <p><strong>Phone Number:</strong> <%= admin_assistant.phone_number %></p>
-  <p><strong>Mail Stop:</strong> <%= admin_assistant.mail_stop %></p>
-  <p><strong>Address:</strong> <%= admin_assistant.address %></p>
-<% else %>
-  <p>Edit this administrator to add an administrative assistant.</p>
-<% end %>
+<%= render 'shared/administrators/show' %>

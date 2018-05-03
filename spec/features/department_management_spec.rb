@@ -4,6 +4,7 @@ RSpec.feature 'Department management' do
   let!(:institution) { create(:institution_with_units) } 
   let(:department) { create(:department) }
   let(:department_attrs) { attributes_for(:department) }
+  let(:department_admin) { create(:department_administrator) }
   
   describe 'Department creation' do
     context 'With correct params' do
@@ -35,6 +36,19 @@ RSpec.feature 'Department management' do
       click_link department.name
 
       expect(page).to have_content(department.name)
+    end
+  end
+
+  describe "Department lists it's administrators" do
+    before(:each) { department_admin }
+    
+    scenario 'User visits a department with existing admins and sees a list of them' do
+      institution = department_admin.department.institution
+      institutional_unit = department_admin.department.institutional_unit
+      department = department_admin.department
+      visit "/institutions/#{institution.slug}/institutional-units/#{institutional_unit.slug}/departments/#{department.slug}"
+
+      expect(page).to have_content("#{department_admin.first_name} #{department_admin.last_name}")
     end
   end
 end

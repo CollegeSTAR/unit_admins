@@ -13,6 +13,7 @@ RSpec.describe Department do
   describe 'associations' do
     it { should belong_to(:institution) }
     it { should belong_to(:institutional_unit) }
+    it { should have_many(:department_administrators) }
   end
 
   describe "to_param" do

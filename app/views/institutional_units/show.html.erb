@@ -1,4 +1,5 @@
 <h1><%= @institutional_unit.name %></h1>
+<%= link_to "Colleges & Schools", institution_path(slug: @institutional_unit.institution.slug) %> /
 <h2>Administrators</h2>
 
 <ul>

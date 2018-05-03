@@ -5,6 +5,7 @@ class Department < ActiveRecord::Base
 
   belongs_to :institution
   belongs_to :institutional_unit
+  has_many :department_administrators
 
   def to_param
     slug

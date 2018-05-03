@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_03_145451) do
+ActiveRecord::Schema.define(version: 2018_05_03_195338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,9 @@ ActiveRecord::Schema.define(version: 2018_05_03_145451) do
     t.bigint "institutional_unit_id"
     t.string "type"
     t.bigint "department_id"
+    t.bigint "institution_id"
     t.index ["department_id"], name: "index_administrators_on_department_id"
+    t.index ["institution_id"], name: "index_administrators_on_institution_id"
     t.index ["institutional_unit_id"], name: "index_administrators_on_institutional_unit_id"
     t.index ["type"], name: "index_administrators_on_type"
   end
@@ -82,6 +84,7 @@ ActiveRecord::Schema.define(version: 2018_05_03_145451) do
   add_foreign_key "administrative_assistants", "administrators"
   add_foreign_key "administrators", "departments"
   add_foreign_key "administrators", "institutional_units"
+  add_foreign_key "administrators", "institutions"
   add_foreign_key "departments", "institutional_units"
   add_foreign_key "departments", "institutions"
   add_foreign_key "institutional_units", "institutions"
