@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :institutions, param: :slug do
     resources :institutional_units, only: [:index, :show, :new, :create], param: :slug, path: 'institutional-units' do
       resources :administrators
-      resources :departments, param: :slug
+      resources :departments, param: :slug do
+        resources :administrators
+      end
     end
   end
 end
