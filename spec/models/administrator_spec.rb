@@ -9,7 +9,6 @@ RSpec.describe Administrator do
   end
 
   describe 'associations' do
-    it { should belong_to(:institutional_unit).optional }
     it { should have_one(:administrative_assistant).dependent(:destroy) }
   end
 

@@ -17,11 +17,18 @@ FactoryBot.define do
       other_job_title 'Dean of Students'
     end
 
-    factory :administrator_with_institutional_unit do
+    factory :unit_administrator do
     
       after(:create) do |admin|
-        admin.institutional_units << create(:institutional_unit)
+        admin.institutional_unit = create(:institutional_unit)
       end
     end
+    factory :department_administrator do
+      job_title 'Chair' 
+      after(:create) do |admin|
+        admin.department = create(:department)
+      end
+    end
+
   end
 end
