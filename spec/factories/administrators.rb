@@ -26,8 +26,10 @@ FactoryBot.define do
     end
     factory :department_administrator, class: DepartmentAdministrator do
       job_title 'Chair' 
-      
+
       department
+      institutional_unit { department.institutional_unit }
+      institution { department.institution }
     end
 
   end

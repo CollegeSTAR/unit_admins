@@ -13,6 +13,7 @@ class UnitAdministratorsController < ApplicationController
 
   def create
     @administrator = UnitAdministrator.new(administrator_params)
+    @administrator.institution = @institution
     @administrator.institutional_unit = @institutional_unit
     @administrator.save
 
