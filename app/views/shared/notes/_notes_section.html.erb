@@ -1,0 +1,13 @@
+<h2>Notes</h2>
+<ul>
+  <% notes_collection.each do |note| %>
+    <li><%= note.text.html_safe if note.text %></li>
+  <% end %>
+</ul>
+<%= form_for parent_record do |f| %>
+  <%= f.fields_for :notes, new_note_record do |note_fields| %>
+    <%= note_fields.label :text, 'Add a new note:' %>
+    <%= note_fields.text_area :text %>
+  <% end %>
+  <%= f.submit 'Save Note' %>
+<% end %>

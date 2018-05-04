@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   root to: 'institutions#index'
   resources :institutions, param: :slug do
-    resources :institutional_units, only: [:index, :show, :new, :create], param: :slug, path: 'institutional-units' do
+    resources :institutional_units, only: [:index, :show, :new, :create, :edit, :update], param: :slug, path: 'institutional-units' do
       resources :unit_administrators, path: 'administrators'
       resources :departments, param: :slug do
         resources :department_administrators, path: 'administrators'

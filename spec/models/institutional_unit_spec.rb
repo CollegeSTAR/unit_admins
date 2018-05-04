@@ -19,6 +19,10 @@ RSpec.describe InstitutionalUnit do
     it { should have_many(:notes).dependent(:destroy) }
   end
 
+  describe 'nested attributes' do
+    it { should accept_nested_attributes_for(:notes) }
+  end
+
   describe 'to_param' do
     it 'returns slug' do
       expect(unit.to_param).to eq(unit.slug)

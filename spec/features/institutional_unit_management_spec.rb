@@ -4,6 +4,7 @@ RSpec.feature 'Institutional Unit Management' do
   let(:unit_attrs) { attributes_for(:institutional_unit) }
   let(:unit) { create(:institutional_unit) }
   let!(:institution) { create(:institution) }
+  let(:note_attrs) { attributes_for(:note) }
 
 
   describe 'Displays an index of units' do
@@ -40,6 +41,17 @@ RSpec.feature 'Institutional Unit Management' do
 
         expect(page).to have_content("Name can't be blank")
       end
+    end
+  end
+
+  describe 'Creating a note' do
+    scenario 'User visits unit and creates a note' do
+      visit "/institutions/#{unit.institution.slug}/institutional-units/#{unit.slug}"
+      fill_in 'institutional_unit_notes_attributes_0_text', with: note_attrs[:text]
+      click_button 'Save Note'
+
+      expect(page).to have_content(note_attrs[:text])
+      expect(page).to have_content("Successfully updated #{unit.name}.")
     end
   end
 end
