@@ -1,9 +1,9 @@
 class DepartmentsController < ApplicationController
 
   before_action :set_institution_and_unit
+  before_action :set_department, only: [:show, :update]
 
   def show
-    @department = Department.find_by slug: params[:slug]
   end
 
   def new
@@ -31,6 +31,19 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  def update
+    if @department.update(department_params)
+      flash[:notice] = "Successfully updated #{@department.name}."
+    else
+      flash[:error] = @department.errors.full_messages
+    end
+    redirect_to institution_institutional_unit_department_path(
+      institution_slug: @institution.slug,
+      institutional_unit_slug: @institutional_unit.slug,
+      id: @department.id
+    )
+  end
+
   private
 
   def set_institution_and_unit
@@ -38,7 +51,18 @@ class DepartmentsController < ApplicationController
     @institutional_unit = InstitutionalUnit.find_by slug: params[:institutional_unit_slug]
   end
 
+  def set_department
+    @department = Department.find_by slug: params[:slug]
+  end
+
   def department_params
-    params.require(:department).permit(:name)
+    params.require(:department)
+      .permit(
+        :name,
+        notes_attributes: [
+          :id,
+          :text
+        ]
+      )
   end
 end

@@ -8,6 +8,8 @@ class Department < ActiveRecord::Base
   has_many :department_administrators, dependent: :destroy
   has_many :notes, dependent: :destroy
 
+  accepts_nested_attributes_for :notes, reject_if: :all_blank
+
   def to_param
     slug
   end

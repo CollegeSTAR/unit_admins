@@ -5,6 +5,7 @@ RSpec.feature 'Department management' do
   let(:department) { create(:department) }
   let(:department_attrs) { attributes_for(:department) }
   let(:department_admin) { create(:department_administrator) }
+  let(:note_attrs) { attributes_for(:note) }
   
   describe 'Department creation' do
     context 'With correct params' do
@@ -49,6 +50,19 @@ RSpec.feature 'Department management' do
       visit "/institutions/#{institution.slug}/institutional-units/#{institutional_unit.slug}/departments/#{department.slug}"
 
       expect(page).to have_content("#{department_admin.first_name} #{department_admin.last_name}")
+    end
+  end
+
+  describe 'Creating a note' do
+    scenario 'User visits department and creates a note' do
+      visit "/institutions/#{department.institution.slug}"\
+        "/institutional-units/#{department.institutional_unit.slug}"\
+        "/departments/#{department.slug}"
+      fill_in 'department_notes_attributes_0_text', with: note_attrs[:text]
+      click_button 'Save Note'
+
+      expect(page).to have_content(note_attrs[:text])
+      expect(page).to have_content("Successfully updated #{department.name}.")
     end
   end
 end

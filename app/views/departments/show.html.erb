@@ -28,3 +28,12 @@
     )
   )%></li>
 </ul>
+
+<%= render(
+  partial: 'shared/notes/notes_section',
+  locals: {
+    parent_record: [@institution, @institutional_unit, @department],
+    notes_collection: @department.notes,
+    new_note_record: @department.notes.build
+  }
+)%>

@@ -17,6 +17,10 @@ RSpec.describe Department do
     it { should have_many(:notes).dependent(:destroy) }
   end
 
+  describe 'accepts_nested_attributes_for' do
+    it { should accept_nested_attributes_for(:notes) }
+  end
+
   describe "to_param" do
     it "should return slug" do
       expect(department.to_param).to eq(department.slug)

@@ -8,7 +8,7 @@ class InstitutionalUnit < ActiveRecord::Base
   has_many :administrators, dependent: :destroy
   has_many :notes, dependent: :destroy
 
-  accepts_nested_attributes_for :notes
+  accepts_nested_attributes_for :notes, reject_if: :all_blank
 
   def to_param
     slug
