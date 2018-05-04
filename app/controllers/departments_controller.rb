@@ -17,7 +17,7 @@ class DepartmentsController < ApplicationController
     @department.institutional_unit = @institutional_unit
     @department.save
     if @department.persisted?
-      flash[:notice] = 'Successfully created department.'
+      flash[:notice] = t('helpers.creation', display_name: @department.name)
       redirect_to(
         institution_institutional_unit_department_path(
           institution_slug: @institution.slug,
@@ -33,7 +33,7 @@ class DepartmentsController < ApplicationController
 
   def update
     if @department.update(department_params)
-      flash[:notice] = "Successfully updated #{@department.name}."
+      flash[:notice] = t('helpers.update', display_name: @department.name)
     else
       flash[:error] = @department.errors.full_messages
     end

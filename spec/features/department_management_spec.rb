@@ -16,7 +16,7 @@ RSpec.feature 'Department management' do
         fill_in 'department_name', with: department_attrs[:name]
         click_button 'Create Department'
 
-        expect(page).to have_content('Successfully created department.')
+        expect(page).to have_content(I18n.t('helpers.creation', display_name: department_attrs[:name]))
       end
     end
     context 'With incorrect params' do
@@ -62,7 +62,7 @@ RSpec.feature 'Department management' do
       click_button 'Save Note'
 
       expect(page).to have_content(note_attrs[:text])
-      expect(page).to have_content("Successfully updated #{department.name}.")
+      expect(page).to have_content(I18n.t('helpers.update', display_name: department.name))
     end
   end
 end
