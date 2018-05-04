@@ -64,6 +64,7 @@ class UnitAdministratorsController < ApplicationController
         :phone_number,
         :mail_stop,
         :sec_loc,
+        :interim,
         administrative_assistant_attributes: [
           :first_name,
           :last_name,
