@@ -4,6 +4,7 @@ RSpec.feature 'Administrator Management' do
   let(:institutional_unit) { create(:institutional_unit) }
   let(:department) { create(:department) }
   let(:unit_admin) { create(:unit_administrator) }
+  let(:department_admin) { create(:department_administrator) }
   let(:admin_attrs) { attributes_for(:administrator) }
   let(:admin_assistant_attrs) { attributes_for(:administrative_assistant) }
   let(:note_attrs) { attributes_for(:note) }
@@ -79,7 +80,9 @@ RSpec.feature 'Administrator Management' do
 
   describe 'Department Administrator creation' do
     scenario 'user adds an administrator' do
-      visit "/institutions/#{department.institution.slug}/institutional-units/#{department.institutional_unit.slug}/departments/#{department.slug}"
+      visit "/institutions/#{department.institution.slug}"\
+        "/institutional-units/#{department.institutional_unit.slug}"\
+        "/departments/#{department.slug}"
       click_link 'Add an administrator'
       
       select('Dean', from: 'department_administrator_job_title')
@@ -108,6 +111,21 @@ RSpec.feature 'Administrator Management' do
       click_button 'Create administrator'
       expect(page).to have_content('Successfully added administrator.')
       expect(AdministrativeAssistant.last.email).to eq(admin_assistant_attrs[:email])
+    end
+  end
+
+  describe 'Department Administrator updating' do
+    scenario 'User visits department admin show page and adds a note' do
+      visit "/institutions/#{department_admin.institution.slug}"\
+        "/institutional-units/#{department_admin.institutional_unit.slug}"\
+        "/departments/#{department_admin.department.slug}"\
+        "/administrators/#{department_admin.id}"
+
+      fill_in 'department_administrator_notes_attributes_0_text', with: note_attrs[:text]
+      click_button 'Save Note'
+
+      expect(page).to have_content(note_attrs[:text])
+      expect(page).to have_content("Successfully updated #{department_admin.job_title}")
     end
   end
 end

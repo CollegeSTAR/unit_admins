@@ -1,9 +1,9 @@
 class DepartmentAdministratorsController < ApplicationController
   
   before_action :set_institution_institution_unit_department
+  before_action :set_administrator, only: [:show, :update]
 
   def show
-    @administrator = DepartmentAdministrator.find(params[:id])
   end
   
   def new
@@ -31,12 +31,30 @@ class DepartmentAdministratorsController < ApplicationController
     end
   end
 
+  def update
+    if @administrator.update(administrator_params)
+      flash[:notice] = "Successfully updated #{@administrator.job_title}."
+    else
+      flash[:error] = @administrator.errors.full_messages
+    end
+    redirect_to institution_institutional_unit_department_department_administrator_path(
+      institution_slug: @institution.slug,
+      institutional_unit_slug: @institutional_unit.slug,
+      department_slug: @department.slug,
+      id: @administrator.id
+    )
+  end
+
   private 
 
   def set_institution_institution_unit_department
     @institution = Institution.find_by slug: params[:institution_slug]
     @institutional_unit = InstitutionalUnit.find_by slug: params[:institutional_unit_slug]
     @department = Department.find_by slug: params[:department_slug]
+  end
+
+  def set_administrator
+    @administrator = DepartmentAdministrator.find(params[:id])
   end
 
   def administrator_params
@@ -57,6 +75,10 @@ class DepartmentAdministratorsController < ApplicationController
           :phone_number,
           :mail_stop,
           :address
+        ],
+        notes_attributes: [
+          :id,
+          :text
         ]
       )
   end

@@ -24,3 +24,12 @@
     administrative_assistant: @administrator.administrative_assistant
   }
 )%>
+
+<%= render(
+  partial: 'shared/notes/notes_section',
+  locals: {
+    parent_record:  [@institution, @institutional_unit, @department, @administrator],
+    notes_collection: @administrator.notes,
+    new_note_record: @administrator.notes.build
+  }
+)%>
