@@ -45,7 +45,7 @@ class InstitutionalUnitsController < ApplicationController
   end
 
   def set_institutional_unit
-    @institutional_unit = InstitutionalUnit.includes(:departments, :administrators, :notes).find_by slug: params[:slug]
+    @institutional_unit = InstitutionalUnit.includes(:departments, :unit_administrators, :notes).find_by slug: params[:slug]
   end
 
   def institutional_unit_params

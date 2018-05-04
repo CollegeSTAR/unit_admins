@@ -15,7 +15,7 @@ RSpec.describe InstitutionalUnit do
   describe 'associations' do
     it { should belong_to(:institution) }
     it { should have_many(:departments).dependent(:destroy) }
-    it { should have_many(:administrators).dependent(:destroy) }
+    it { should have_many(:unit_administrators).dependent(:destroy) }
     it { should have_many(:notes).dependent(:destroy) }
   end
 

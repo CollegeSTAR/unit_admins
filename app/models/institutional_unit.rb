@@ -5,7 +5,7 @@ class InstitutionalUnit < ActiveRecord::Base
 
   belongs_to :institution
   has_many :departments, dependent: :destroy
-  has_many :administrators, dependent: :destroy
+  has_many :unit_administrators, dependent: :destroy
   has_many :notes, dependent: :destroy
 
   accepts_nested_attributes_for :notes, reject_if: :all_blank

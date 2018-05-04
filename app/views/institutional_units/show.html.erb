@@ -3,7 +3,7 @@
 <h2>Administrators</h2>
 
 <ul>
-  <% @institutional_unit.administrators.each do |admin| %>
+  <% @institutional_unit.unit_administrators.each do |admin| %>
     <li><%= "#{admin.job_title}:".capitalize %>
         <%= link_to( "#{admin.title.capitalize} #{admin.first_name.capitalize} #{admin.last_name.capitalize}",
           institution_institutional_unit_unit_administrator_path(
