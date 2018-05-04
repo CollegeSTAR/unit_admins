@@ -29,7 +29,7 @@ RSpec.feature 'Institutional Unit Management' do
         fill_in 'institutional_unit_name', with: unit_attrs[:name]
         click_button 'Create Unit'
 
-        expect(page).to have_content('Institutional Unit successfully created.')
+        expect(page).to have_content(I18n.t('helpers.creation', display_name: unit_attrs[:name]))
       end
     end
     
@@ -51,7 +51,7 @@ RSpec.feature 'Institutional Unit Management' do
       click_button 'Save Note'
 
       expect(page).to have_content(note_attrs[:text])
-      expect(page).to have_content("Successfully updated #{unit.name}.")
+      expect(page).to have_content(I18n.t('helpers.update', display_name: unit.name))
     end
   end
 end

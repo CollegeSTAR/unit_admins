@@ -21,7 +21,7 @@ class InstitutionalUnitsController < ApplicationController
     @institutional_unit.save
     
     if @institutional_unit.persisted?
-      flash[:notice] = "Institutional Unit successfully created."
+      flash[:notice] = t('helpers.creation', display_name: @institutional_unit.name)
       redirect_to institution_institutional_unit_path(institution_slug: @institution.slug, slug: @institutional_unit.slug)
     else
       flash[:error] = @institutional_unit.errors.full_message(:name, "can't be blank")
@@ -31,7 +31,7 @@ class InstitutionalUnitsController < ApplicationController
 
   def update
     if @institutional_unit.update(institutional_unit_params)
-      flash[:notice] = "Successfully updated #{@institutional_unit.name}."
+      flash[:notice] = t('helpers.update', display_name: @institutional_unit.name)
     else
       flash[:error] = @institutional_unit.errors.full_messages
     end
