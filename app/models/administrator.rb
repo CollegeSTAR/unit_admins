@@ -5,8 +5,10 @@ class Administrator < ActiveRecord::Base
   belongs_to :institution
   belongs_to :institutional_unit
   has_one :administrative_assistant, dependent: :destroy
+  has_many :notes, dependent: :destroy
 
   accepts_nested_attributes_for :administrative_assistant, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :notes, reject_if: :all_blank, allow_destroy: true
 
   def other_job_title=(value)
     if self.job_title == nil || self.job_title == ''

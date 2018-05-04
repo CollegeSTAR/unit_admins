@@ -3,8 +3,10 @@ require 'rails_helper'
 RSpec.feature 'Administrator Management' do
   let(:institutional_unit) { create(:institutional_unit) }
   let(:department) { create(:department) }
+  let(:unit_admin) { create(:unit_administrator) }
   let(:admin_attrs) { attributes_for(:administrator) }
   let(:admin_assistant_attrs) { attributes_for(:administrative_assistant) }
+  let(:note_attrs) { attributes_for(:note) }
 
   describe 'Institutional Unit Administrator creation' do
     scenario 'user adds an administrator' do
@@ -61,7 +63,21 @@ RSpec.feature 'Administrator Management' do
     end
   end
 
-  describe 'Department Administrator creattion' do
+  describe 'Institutional Unit Administrator updating' do
+    scenario 'User visits unit admin show page and adds a note' do
+      visit "/institutions/#{unit_admin.institution.slug}"\
+        "/institutional-units/#{unit_admin.institutional_unit.slug}"\
+        "/administrators/#{unit_admin.id}"
+
+      fill_in 'unit_administrator_notes_attributes_0_text', with: note_attrs[:text]
+      click_button 'Save Note'
+
+      expect(page).to have_content(note_attrs[:text])
+      expect(page).to have_content("Successfully updated #{unit_admin.job_title}")
+    end
+  end
+
+  describe 'Department Administrator creation' do
     scenario 'user adds an administrator' do
       visit "/institutions/#{department.institution.slug}/institutional-units/#{department.institutional_unit.slug}/departments/#{department.slug}"
       click_link 'Add an administrator'

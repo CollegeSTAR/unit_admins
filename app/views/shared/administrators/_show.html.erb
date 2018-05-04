@@ -1,16 +1,15 @@
 
-<p><strong>Email:</strong> <%= @administrator.email.blank?? 'Not provided' : @administrator.email %></p>
-<p><strong>Phone Number:</strong> <%= @administrator.phone_number.blank?? 'Not Provided' : @administrator.phone_number %></p>
-<p><strong>Mail Stop:</strong> <%= @administrator.mail_stop.blank?? 'Not Provided' : @administrator.mail_stop %></p>
+<p><strong>Email:</strong> <%= administrator.email.blank?? 'Not provided' : administrator.email %></p>
+<p><strong>Phone Number:</strong> <%= administrator.phone_number.blank?? 'Not Provided' : administrator.phone_number %></p>
+<p><strong>Mail Stop:</strong> <%= administrator.mail_stop.blank?? 'Not Provided' : administrator.mail_stop %></p>
 
 <h2>Administrative Assistant</h2>
-<% if !@administrator.administrative_assistant.blank? %>
-  <% admin_assistant = @administrator.administrative_assistant %>
-  <p><strong><%= admin_assistant.first_name %> <%= admin_assistant.last_name %></strong></p>
-  <p><strong>Email:</strong> <%= admin_assistant.email %></p>
-  <p><strong>Phone Number:</strong> <%= admin_assistant.phone_number %></p>
-  <p><strong>Mail Stop:</strong> <%= admin_assistant.mail_stop %></p>
-  <p><strong>Address:</strong> <%= admin_assistant.address %></p>
+<% if !administrative_assistant.blank? %>
+  <p><strong><%= administrative_assistant.first_name %> <%= administrative_assistant.last_name %></strong></p>
+  <p><strong>Email:</strong> <%= administrative_assistant.email %></p>
+  <p><strong>Phone Number:</strong> <%= administrative_assistant.phone_number %></p>
+  <p><strong>Mail Stop:</strong> <%= administrative_assistant.mail_stop %></p>
+  <p><strong>Address:</strong> <%= administrative_assistant.address %></p>
 <% else %>
   <p>Edit this administrator to add an administrative assistant.</p>
 <% end %>

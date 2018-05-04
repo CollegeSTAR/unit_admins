@@ -1,7 +1,8 @@
 <h2>Notes</h2>
 <ul>
   <% notes_collection.each do |note| %>
-    <li><%= note.text.html_safe if note.text %></li>
+    <% next if note.text.blank? %>
+    <li><%= note.text.html_safe %></li>
   <% end %>
 </ul>
 <%= form_for parent_record do |f| %>

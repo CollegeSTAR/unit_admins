@@ -18,11 +18,9 @@ FactoryBot.define do
     end
 
     factory :unit_administrator, class: UnitAdministrator do
-    
-      after(:create) do |admin|
         
-        institutional_unit
-      end
+      institutional_unit
+      institution { institutional_unit.institution}
     end
     factory :department_administrator, class: DepartmentAdministrator do
       job_title 'Chair' 

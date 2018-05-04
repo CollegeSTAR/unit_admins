@@ -17,4 +17,10 @@
   )
 )%> / <%= @administrator.job_title %>
 
-<%= render 'shared/administrators/show' %>
+<%= render(
+  partial: 'shared/administrators/show',
+  locals: {
+    administrator: @administrator,
+    administrative_assistant: @administrator.administrative_assistant
+  }
+)%>
