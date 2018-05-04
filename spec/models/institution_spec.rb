@@ -22,4 +22,14 @@ RSpec.describe Institution do
       expect(institution.to_param).to eq(institution.slug) 
     end
   end
+
+  describe 'sync_slug' do
+    it 'should sync the slug to the name on save' do
+      institution
+      institution.name = 'Another institution name'
+      institution.save
+      institution.reload
+      expect(institution.slug).to eq(institution.name.parameterize)
+    end
+  end
 end

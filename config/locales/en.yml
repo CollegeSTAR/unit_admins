@@ -30,4 +30,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  helpers:
+    submit:
+      create: "Create %{model}"
+      update: "Save Changes"
+    creation: "Successfully created %{display_name}."
+    update: "Successfully updated %{display_name}."

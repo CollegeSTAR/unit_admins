@@ -46,7 +46,7 @@ RSpec.feature 'Institution management' do
         fill_in 'Name', with: institution_attrs[:name]
         click_button 'Create Institution'
 
-        expect(page).to have_content('Successfully created institution.')
+        expect(page).to have_content(I18n.t('helpers.creation', display_name: institution_attrs[:name]))
       end
     end
     context 'With incorrect params' do
@@ -56,6 +56,19 @@ RSpec.feature 'Institution management' do
 
         expect(page).to have_content("Name can't be blank.")
       end
+    end
+  end
+
+  describe 'Edit Insitution' do
+    scenario 'User visits edit page for institution' do
+      new_name = "New institution name"
+      visit "/institutions/#{institution.slug}/edit"
+
+      fill_in 'institution_name', with: new_name
+      click_button 'Save Changes'
+
+      expect(page).to have_content(new_name)
+      expect(page).to have_content(I18n.t('helpers.update', display_name: new_name))
     end
   end
 end
