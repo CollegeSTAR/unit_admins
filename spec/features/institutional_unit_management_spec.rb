@@ -27,7 +27,7 @@ RSpec.feature 'Institutional Unit Management' do
         click_link 'Add new institutional unit'
 
         fill_in 'institutional_unit_name', with: unit_attrs[:name]
-        click_button 'Create Unit'
+        click_button I18n.t('helpers.submit.create', model: InstitutionalUnit.model_name.human)
 
         expect(page).to have_content(I18n.t('helpers.creation', display_name: unit_attrs[:name]))
       end
@@ -37,7 +37,7 @@ RSpec.feature 'Institutional Unit Management' do
       scenario 'User fills out new unit form' do
         visit "/institutions/#{institution.slug}/institutional-units/new"
 
-        click_button 'Create Unit'
+        click_button I18n.t('helpers.submit.create', model: InstitutionalUnit.model_name.human)
 
         expect(page).to have_content("Name can't be blank")
       end
@@ -52,6 +52,18 @@ RSpec.feature 'Institutional Unit Management' do
 
       expect(page).to have_content(note_attrs[:text])
       expect(page).to have_content(I18n.t('helpers.update', display_name: unit.name))
+    end
+  end
+
+  describe 'Edit a unit' do
+    scenario 'User edits a unit' do
+      new_name = 'Edited Unit Name'
+      visit "/institutions/#{unit.institution.slug}/institutional-units/#{unit.slug}/edit"
+      fill_in 'institutional_unit_name', with: new_name
+      click_button I18n.t('helpers.submit.update')
+
+      expect(page).to have_content(I18n.t('helpers.update', display_name: new_name))
+      expect(page).to have_content(new_name)
     end
   end
 end

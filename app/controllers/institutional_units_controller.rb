@@ -1,6 +1,6 @@
 class InstitutionalUnitsController < ApplicationController
   before_action :set_institution
-  before_action :set_institutional_unit, only: [:show, :update]
+  before_action :set_institutional_unit, only: [:show, :edit, :update]
 
   def index
     @institutional_units = InstitutionalUnit.all
@@ -27,6 +27,9 @@ class InstitutionalUnitsController < ApplicationController
       flash[:error] = @institutional_unit.errors.full_message(:name, "can't be blank")
       render :new
     end
+  end
+
+  def edit
   end
 
   def update
