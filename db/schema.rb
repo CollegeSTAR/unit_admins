@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_03_201217) do
+ActiveRecord::Schema.define(version: 2018_05_07_195353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,31 @@ ActiveRecord::Schema.define(version: 2018_05_03_201217) do
     t.index ["institutional_unit_id"], name: "index_notes_on_institutional_unit_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.integer "failed_attempts", default: 0, null: false
+    t.string "unlock_token"
+    t.datetime "locked_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "institution_id"
+    t.boolean "admin", default: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["institution_id"], name: "index_users_on_institution_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "administrative_assistants", "administrators"
   add_foreign_key "administrators", "departments"
   add_foreign_key "administrators", "institutional_units"
@@ -106,4 +131,5 @@ ActiveRecord::Schema.define(version: 2018_05_03_201217) do
   add_foreign_key "notes", "departments"
   add_foreign_key "notes", "institutional_units"
   add_foreign_key "notes", "institutions"
+  add_foreign_key "users", "institutions"
 end
