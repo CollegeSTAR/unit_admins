@@ -28,4 +28,17 @@ RSpec.describe InstitutionalUnit do
       expect(unit.to_param).to eq(unit.slug)
     end
   end
+
+  describe 'sync_slug' do
+    before(:each) do
+      unit
+    end
+
+    it 'updates the slug when name is changed' do
+      unit.name = 'New name'
+      unit.save
+      unit.reload
+      expect(unit.slug).to eq(unit.name.parameterize)
+    end
+  end
 end

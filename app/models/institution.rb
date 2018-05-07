@@ -1,4 +1,5 @@
 class Institution < ActiveRecord::Base
+  
   before_save :sync_slug  
   validates :name, :slug, presence: true
   validates_uniqueness_of :name, :slug
@@ -14,6 +15,8 @@ class Institution < ActiveRecord::Base
   private
 
   def sync_slug
-    self.slug = self.name.parameterize
+    if self.slug != self.name.parameterize
+      self.slug = self.name.parameterize
+    end
   end
 end
