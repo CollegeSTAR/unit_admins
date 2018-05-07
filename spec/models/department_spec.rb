@@ -4,6 +4,7 @@ RSpec.describe Department do
   let(:department) { create(:department) }
 
   describe 'validations' do
+    subject { create(:department) }
     it { should validate_presence_of(:name) }
     it { should validate_uniqueness_of(:name) }
     it { should validate_presence_of(:slug) }
@@ -24,6 +25,19 @@ RSpec.describe Department do
   describe "to_param" do
     it "should return slug" do
       expect(department.to_param).to eq(department.slug)
+    end
+  end
+
+  describe "sync slug" do
+    before(:each) do
+      department
+    end
+    it "should sync the slug to name on save" do
+      new_name = "A new name"
+      department.name = new_name
+      department.save
+      department.reload
+      expect(department.slug).to eq(department.name.parameterize)
     end
   end
 end

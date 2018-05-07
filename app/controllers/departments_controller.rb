@@ -1,7 +1,7 @@
 class DepartmentsController < ApplicationController
 
   before_action :set_institution_and_unit
-  before_action :set_department, only: [:show, :update]
+  before_action :set_department, only: [:show, :edit, :update]
 
   def show
   end
@@ -31,6 +31,9 @@ class DepartmentsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     if @department.update(department_params)
       flash[:notice] = t('helpers.update', display_name: @department.name)
@@ -40,7 +43,7 @@ class DepartmentsController < ApplicationController
     redirect_to institution_institutional_unit_department_path(
       institution_slug: @institution.slug,
       institutional_unit_slug: @institutional_unit.slug,
-      id: @department.id
+      slug: @department.slug
     )
   end
 

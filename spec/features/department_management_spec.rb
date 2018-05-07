@@ -65,4 +65,21 @@ RSpec.feature 'Department management' do
       expect(page).to have_content(I18n.t('helpers.update', display_name: department.name))
     end
   end
+
+  describe 'Editing a department' do
+    before(:each) do
+      department
+    end
+    scenario 'User edits an existing department' do
+      new_name = 'New Department Name'
+      visit "/institutions/#{department.institution.slug}"\
+        "/institutional-units/#{department.institutional_unit.slug}"\
+        "/departments/#{department.slug}/edit"
+      fill_in 'department_name', with: new_name
+      click_button I18n.t('helpers.submit.update')
+
+      expect(page).to have_content(new_name)
+      expect(page).to have_content(I18n.t('helpers.update', display_name: new_name))
+    end
+  end
 end
