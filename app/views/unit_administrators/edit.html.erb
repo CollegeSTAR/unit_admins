@@ -1,9 +1,9 @@
-<h1>Add a Department Administrator</h1>
+<h1>Update <%= @administrator.job_title %></h1>
 
 <%= render(
   partial: 'shared/administrators/form',
   locals: {
-    record: [@institution, @institutional_unit, @department, @administrator],
+    record: [@institution, @institutional_unit, @administrator],
     admin_assistant: @administrator.administrative_assistant
   }
 )%>

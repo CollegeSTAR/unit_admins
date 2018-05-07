@@ -1,7 +1,7 @@
 class DepartmentAdministratorsController < ApplicationController
   
   before_action :set_institution_institution_unit_department
-  before_action :set_administrator, only: [:show, :update]
+  before_action :set_administrator, only: [:show, :edit, :update]
 
   def show
   end
@@ -19,7 +19,7 @@ class DepartmentAdministratorsController < ApplicationController
     @administrator.save
 
     if @administrator.persisted?
-      flash[:notice] = 'Successfully added administrator.'
+      flash[:notice] = t('helpers.creation', display_name: @administrator.job_title)
       redirect_to institution_institutional_unit_department_department_administrator_path(
         institution_slug: @institution.slug,
         institutional_unit_slug: @institutional_unit.slug,
@@ -31,9 +31,12 @@ class DepartmentAdministratorsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     if @administrator.update(administrator_params)
-      flash[:notice] = "Successfully updated #{@administrator.job_title}."
+      flash[:notice] = t('helpers.update', display_name: @administrator.job_title)
     else
       flash[:error] = @administrator.errors.full_messages
     end

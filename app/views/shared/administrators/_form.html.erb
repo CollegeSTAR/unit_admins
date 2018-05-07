@@ -1,0 +1,38 @@
+<%= form_for record do |f| %>
+  <%= f.label :job_title %>
+  <%= f.select :job_title, ['Dean','Associate Dean', 'Chair', 'Personnel Chair', ['Other', '']], include_blank: true %>
+  <%= f.label :title %>
+  <%= f.select :title, ['Dr.', 'Mr.', 'Mrs.', 'Ms.'], include_blank: true %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number %>
+  <%= f.label :mail_stop %>
+  <%= f.text_field :mail_stop %>
+  <%= f.label :sec_loc, 'Secretary Location' %>
+  <%= f.text_field :sec_loc %>
+  <%= f.label :interim %>
+  <%= f.check_box :interim %>
+  
+  <h2>Administrative Assistant</h2>
+  <%= f.fields_for :administrative_assistant, admin_assistant do |assistant_fields| %>
+    <%= assistant_fields.label :first_name %>
+    <%= assistant_fields.text_field :first_name %>
+    <%= assistant_fields.label :last_name %>
+    <%= assistant_fields.text_field :last_name %>
+    <%= assistant_fields.label :email %>
+    <%= assistant_fields.text_field :email %>
+    <%= assistant_fields.label :phone_number %>
+    <%= assistant_fields.text_field :phone_number %>
+    <%= assistant_fields.label :mail_stop %>
+    <%= assistant_fields.text_field :mail_stop %>
+    <%= assistant_fields.label :address %>
+    <%= assistant_fields.text_field :address %>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>

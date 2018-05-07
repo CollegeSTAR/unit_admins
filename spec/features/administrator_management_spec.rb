@@ -24,7 +24,7 @@ RSpec.feature 'Administrator Management' do
       fill_in 'unit_administrator_sec_loc', with: admin_attrs[:sec_loc]
       check 'unit_administrator_interim'
       
-      click_button 'Create administrator'
+      click_button I18n.t('helpers.submit.create', model: UnitAdministrator.model_name.human)
       expect(page).to have_content('Successfully added administrator.')
       expect(Administrator.last.email).to eq(admin_attrs[:email])
     end
@@ -57,7 +57,8 @@ RSpec.feature 'Administrator Management' do
         fill_in 'unit_administrator_administrative_assistant_attributes_address',
                 with: admin_assistant_attrs[:address]
 
-        click_button 'Create administrator'
+        click_button I18n.t('helpers.submit.create', model: UnitAdministrator.model_name.human)
+        
         expect(page).to have_content('Successfully added administrator.')
         expect(AdministrativeAssistant.last.email).to eq(admin_assistant_attrs[:email])
       end
@@ -65,6 +66,24 @@ RSpec.feature 'Administrator Management' do
   end
 
   describe 'Institutional Unit Administrator updating' do
+    scenario 'User visits unit admin page and updates the admin info' do
+      new_first_name = 'Jane'
+      new_last_name = 'Smith'
+      new_email = 'jane.smith01@example.com'
+
+      visit "/institutions/#{unit_admin.institution.slug}"\
+        "/institutional-units/#{unit_admin.institutional_unit.slug}"\
+        "/administrators/#{unit_admin.id}/edit"
+      fill_in 'unit_administrator_first_name', with: new_first_name
+      fill_in 'unit_administrator_last_name', with: new_last_name
+      fill_in 'unit_administrator_email', with: new_email
+      click_button I18n.t('helpers.submit.update')
+
+      expect(page).to have_content(I18n.t('helpers.update', display_name: unit_admin.job_title))
+      expect(page).to have_content(new_first_name)
+      expect(page).to have_content(new_last_name)
+      expect(page).to have_content(new_email)
+    end
     scenario 'User visits unit admin show page and adds a note' do
       visit "/institutions/#{unit_admin.institution.slug}"\
         "/institutional-units/#{unit_admin.institutional_unit.slug}"\
@@ -74,7 +93,7 @@ RSpec.feature 'Administrator Management' do
       click_button 'Save Note'
 
       expect(page).to have_content(note_attrs[:text])
-      expect(page).to have_content("Successfully updated #{unit_admin.job_title}")
+      expect(page).to have_content(I18n.t('helpers.update', display_name: unit_admin.job_title))
     end
   end
 
@@ -108,13 +127,44 @@ RSpec.feature 'Administrator Management' do
       fill_in 'department_administrator_administrative_assistant_attributes_address',
               with: admin_assistant_attrs[:address]
 
-      click_button 'Create administrator'
-      expect(page).to have_content('Successfully added administrator.')
+      click_button I18n.t('helpers.submit.create', model: DepartmentAdministrator.model_name.human)
+      expect(page).to have_content(I18n.t('helpers.creation', display_name: 'Dean'))
       expect(AdministrativeAssistant.last.email).to eq(admin_assistant_attrs[:email])
     end
   end
 
   describe 'Department Administrator updating' do
+    scenario 'User visits unit admin page and updates the admin info' do
+      new_first_name = 'Jane'
+      new_last_name = 'Smith'
+      new_email = 'jane.smith01@example.com'
+
+      visit "/institutions/#{department_admin.institution.slug}"\
+        "/institutional-units/#{department_admin.institutional_unit.slug}"\
+        "/departments/#{department_admin.department.slug}"\
+        "/administrators/#{department_admin.id}/edit"
+
+      fill_in 'department_administrator_first_name', with: new_first_name
+      fill_in 'department_administrator_last_name', with: new_last_name
+      fill_in 'department_administrator_email', with: new_email
+      click_button I18n.t('helpers.submit.update')
+
+      expect(page).to have_content(I18n.t('helpers.update', display_name: department_admin.job_title))
+      expect(page).to have_content(new_first_name)
+      expect(page).to have_content(new_last_name)
+      expect(page).to have_content(new_email)
+    end
+    scenario 'User visits unit admin show page and adds a note' do
+      visit "/institutions/#{unit_admin.institution.slug}"\
+        "/institutional-units/#{unit_admin.institutional_unit.slug}"\
+        "/administrators/#{unit_admin.id}"
+
+      fill_in 'unit_administrator_notes_attributes_0_text', with: note_attrs[:text]
+      click_button 'Save Note'
+
+      expect(page).to have_content(note_attrs[:text])
+      expect(page).to have_content(I18n.t('helpers.update', display_name: unit_admin.job_title))
+    end
     scenario 'User visits department admin show page and adds a note' do
       visit "/institutions/#{department_admin.institution.slug}"\
         "/institutional-units/#{department_admin.institutional_unit.slug}"\
@@ -125,7 +175,7 @@ RSpec.feature 'Administrator Management' do
       click_button 'Save Note'
 
       expect(page).to have_content(note_attrs[:text])
-      expect(page).to have_content("Successfully updated #{department_admin.job_title}")
+      expect(page).to have_content(I18n.t('helpers.update', display_name: department_admin.job_title))
     end
   end
 end

@@ -1,7 +1,7 @@
 class UnitAdministratorsController < ApplicationController
   
   before_action :set_institution_institution_unit
-  before_action :set_administrator, only: [:show, :update]
+  before_action :set_administrator, only: [:show, :edit, :update]
 
   def show
   end
@@ -29,9 +29,12 @@ class UnitAdministratorsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     if @administrator.update(administrator_params)
-      flash[:notice] = "Successfully updated #{@administrator.job_title}"
+      flash[:notice] = t('helpers.update', display_name: @administrator.job_title)
     else
       flash[:errors] = @administrator.errors.full_messages
     end
