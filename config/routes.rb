@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users, path_names: { sign_out: 'logout' }
+  as :user do
+    get 'login', to: 'devise/sessions#new'
+  end
+
 
   root to: 'institutions#index'
   resources :institutions, param: :slug do
