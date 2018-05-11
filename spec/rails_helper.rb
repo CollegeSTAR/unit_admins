@@ -12,6 +12,7 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'support/factory_bot'
+require 'pundit/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
