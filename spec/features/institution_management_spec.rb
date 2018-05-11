@@ -6,6 +6,10 @@ RSpec.feature 'Institution management' do
   let!(:institution) { create(:institution) }
   let(:institution_with_units) { create(:institution_with_units) }
 
+  before(:each) do
+    sign_in create(:user)
+  end
+
   describe 'Index' do
     scenario 'User visits Institution index page' do
       visit '/institutions'

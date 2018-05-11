@@ -6,7 +6,11 @@ RSpec.feature 'Department management' do
   let(:department_attrs) { attributes_for(:department) }
   let(:department_admin) { create(:department_administrator) }
   let(:note_attrs) { attributes_for(:note) }
-  
+
+  before(:each) do
+    sign_in create(:user)
+  end
+
   describe 'Department creation' do
     context 'With correct params' do
       scenario 'user creates a new department' do

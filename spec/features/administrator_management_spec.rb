@@ -9,6 +9,10 @@ RSpec.feature 'Administrator Management' do
   let(:admin_assistant_attrs) { attributes_for(:administrative_assistant) }
   let(:note_attrs) { attributes_for(:note) }
 
+  before(:each) do
+    sign_in create(:user)
+  end
+
   describe 'Institutional Unit Administrator creation' do
     scenario 'user adds an administrator' do
       visit "/institutions/#{institutional_unit.institution.slug}/institutional-units/#{institutional_unit.slug}"

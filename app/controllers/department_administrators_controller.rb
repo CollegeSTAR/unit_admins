@@ -1,5 +1,6 @@
 class DepartmentAdministratorsController < ApplicationController
-  
+
+  before_action :authenticate_user!
   before_action :set_institution_institution_unit_department
   before_action :set_administrator, only: [:show, :edit, :update]
 

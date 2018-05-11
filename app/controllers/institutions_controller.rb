@@ -1,5 +1,6 @@
 class InstitutionsController < ApplicationController
- 
+  
+  before_action :authenticate_user! 
   before_action :set_institution, only: [:show, :edit, :update]
   def index
     @institutions = Institution.all

@@ -1,4 +1,6 @@
 class InstitutionalUnitsController < ApplicationController
+  
+  before_action :authenticate_user!
   before_action :set_institution
   before_action :set_institutional_unit, only: [:show, :edit, :update]
 

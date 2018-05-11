@@ -6,6 +6,9 @@ RSpec.feature 'Institutional Unit Management' do
   let!(:institution) { create(:institution) }
   let(:note_attrs) { attributes_for(:note) }
 
+  before(:each) do
+    sign_in create(:user)
+  end
 
   describe 'Displays an index of units' do
     before(:each) do
